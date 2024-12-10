@@ -1,10 +1,6 @@
-/*=============== GOOGLE FONTS ===============*/
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap");
 
-/*=============== VARIABLES CSS ===============*/
 :host {
-  /*========== Colors ==========*/
-  /*Color mode HSL(hue, saturation, lightness)*/
   --first-color: hsl(208, 92%, 54%);
   --first-color-alt: hsl(208, 88%, 50%);
   --title-color: hsl(220, 68%, 4%);
@@ -13,24 +9,20 @@
   --body-color: hsl(0, 0%, 100%);
   --container-color: hsl(220, 50%, 97%);
 
-  /*========== Font and typography ==========*/
-  /*.5rem = 8px | 1rem = 16px ...*/
+  
   --body-font: "Montserrat", system-ui;
   --big-font-size: 2.5rem;
   --normal-font-size: .938rem;
   --small-font-size: .813rem;
   --tiny-font-size: .688rem;
 
-  /*========== Font weight ==========*/
   --font-regular: 400;
   --font-medium: 500;
   --font-semi-bold: 600;
 
-  /*========== z index ==========*/
   --z-tooltip: 10;
   --z-fixed: 100;
 }
-/*========== Responsive typography ==========*/
 @media screen and (min-width: 1150px) {
     :root {
       --big-font-size: 3rem;
@@ -39,8 +31,6 @@
       --tiny-font-size: .75rem;
     }
   }
-  /*=============== BASE ===============*/
-  
   
   body,
   input,
@@ -70,7 +60,6 @@
     height: auto;
   }
   
-  /*=============== REUSABLE CSS CLASSES ===============*/
   .container {
     max-width: 1120px;
     margin-inline: 1.5rem;
@@ -81,7 +70,6 @@
     gap: 1rem;
   }
   
-  /*=============== LOGIN  ===============*/
   .login {
     position: relative;
     height: 100vh;
@@ -245,7 +233,6 @@
     pointer-events: none;
   }
   
-  /* Input focus move up label */
   .login__input:focus ~ .login__label {
     transform: translateY(-12px);
     font-size: var(--tiny-font-size);
@@ -255,7 +242,6 @@
     padding-block: 2rem 1rem;
   }
   
-  /* Input focus sticky top label */
   .login__input:not(:placeholder-shown).login__input:not(:focus) ~ .login__label {
     transform: translateY(-12px);
     font-size: var(--tiny-font-size);
@@ -265,7 +251,6 @@
     padding-block: 2rem 1rem;
   }
   
-  /* Input focus color */
   .login__input:focus {
     border-color: var(--first-color);
   }
@@ -275,7 +260,6 @@
     color: var(--first-color);
   }
   
-  /* Show hide login & create account */
   .active .login__access {
     transform: translateX(15rem);
     opacity: 0;
@@ -288,15 +272,12 @@
     pointer-events: initial;
   }
   
-  /*=============== BREAKPOINTS ===============*/
-  /* For small devices */
   @media screen and (max-width: 320px) {
     .container {
       margin-inline: 1rem;
     }
   }
   
-  /* For medium devices */
   @media screen and (min-width: 540px) {
     .login__area {
       width: 380px;
@@ -310,7 +291,6 @@
     }
   }
   
-  /* For large devices */
   @media screen and (min-width: 1150px) {
     .container {
       margin-inline: auto;
@@ -344,4 +324,4 @@
     .login__img {
       transform: translate(0rem, 0rem);
     }
-  }
+  } */

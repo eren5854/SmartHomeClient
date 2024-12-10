@@ -26,7 +26,7 @@ export class LoginComponent {
 
   login(form:NgForm){    
     if (form.valid) {
-      this.http.post("https://localhost:7031/api/Auth/Login", this.loginModel)
+      this.http.post("https://192.168.1.101:45455/api/Auth/Login", this.loginModel)
       .subscribe({
         next:(res: any) => {
           console.log(res.data);
@@ -36,18 +36,20 @@ export class LoginComponent {
         },
         error:(err:HttpErrorResponse) => {
           console.log(err);
-          this.swal.callToast(err.error.errorMessages[0], 'warning');
+          this.swal.callToast2(err.error.errorMessages[0], 'warning');
         }
       });
     }
     else{
-      this.swal.callToast("Please fill the all area!!", 'warning')
+      console.log("Please fill the all area!!");
+      
+      this.swal.callToast2("Please fill the all area!!", 'warning')
     }
   }
 
   signup(form:NgForm){
     if (form.valid) {
-      this.http.post("https://localhost:7031/api/Auth/Signup", this.userModel)
+      this.http.post("https://192.168.1.101:45455/api/Auth/Signup", this.userModel)
       .subscribe({
         next: (res:any) => {
           console.log(res.data);

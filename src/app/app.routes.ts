@@ -5,6 +5,8 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { inject } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { HomeComponent } from './components/home/home.component';
+import { RoomsComponent } from './components/rooms/rooms.component';
+import { SensorsComponent } from './components/sensors/sensors.component';
 
 export const routes: Routes = [
     {
@@ -23,6 +25,14 @@ export const routes: Routes = [
             {
                 path: "",
                 component: HomeComponent
+            },
+            {
+                path: "rooms",
+                component: RoomsComponent
+            },
+            {
+                path: "sensors",
+                component: SensorsComponent
             }
         ]
     }

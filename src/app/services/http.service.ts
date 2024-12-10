@@ -10,7 +10,7 @@ export class HttpService {
   // imageUrl:string = "https://localhost:7023/Images/";
   // imageUrl:string = "https://webapi.dgmbobinaj.com/Images/" 
   // url:string = "https://localhost:7023/api/"
-   url:string = "https://webapi.dgmbobinaj.com/api/"
+   url:string = "https://192.168.1.101:45455/api/"
    constructor(
      private http: HttpClient,
      private auth: AuthService,

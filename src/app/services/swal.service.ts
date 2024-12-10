@@ -29,9 +29,9 @@ export class SwalService {
   //   Toast.fire(message, '', icon)
   // }
 
-  callToast2(message: string) {
+  callToast2(message: string, iconx: any) {
     Swal.fire({
-      icon: 'error',
+      icon: iconx,
       text:message,
       timer: 3000,
       toast: true,

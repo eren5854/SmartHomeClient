@@ -34,13 +34,15 @@ export class AuthService {
         }
         
         this.user.id = decode["Id"];
-        console.log(this.user.id);
         
         this.user.email = decode["Email"];
-        console.log(this.user.email);
         
         this.user.userName = decode["UserName"];
-        console.log(this.user.userName);
+
+        this.user.fullName = decode["FullName"];
+        
+        this.user.role = decode["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+        
         
         return true;
       }catch(error){
