@@ -1,10 +1,10 @@
+<div class="row page-titles">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active"><a routerLink="/sensors">Cihazlar</a></li>
+        <li class="breadcrumb-item"><a routerLink="/sensor/{{sensorId}}">{{sensorModel.sensorName}}</a></li>
+    </ol>
+</div>
 <div class="row">
-    <div class="row page-titles">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active"><a routerLink="/sensors">Cihazlar</a></li>
-            <li class="breadcrumb-item"><a routerLink="/sensor/{{sensorId}}">{{sensorModel.sensorName}}</a></li>
-        </ol>
-    </div>
     <div class="col-xl-6 col-lg-6 mb-3">
         <div class="card">
             <div class="card-body">
@@ -69,7 +69,7 @@
                                (click)="copyToClipboard(sensorModel.secretKey!)">
                         <button type="button" class="btn position-absolute end-0 top-0"
                                 (click)="showSecretKey = !showSecretKey" style="height: 100%; color: aliceblue;">
-                            <i [class]="showSecretKey ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+                            <i [class]="showSecretKey ? 'fa fa-eye-slash' : 'fa fa-eye'" style="color: red;"></i>
                         </button>
                     </div>
                     <button (click)="generateSecretKey()" type="button" class="btn btn-primary me-3">Secret Key oluştur</button>
