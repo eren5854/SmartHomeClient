@@ -49,7 +49,7 @@ export class HttpService {
      }).subscribe({
        next: (res: any) => {
          callBack(res);
-         this.swal.callToast(res.data, 'success');
+         this.swal.callToast2(res.data, 'success');
        },
        error: (err: HttpErrorResponse) => {
          if (!err.error.isSuccess) {

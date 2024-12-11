@@ -7,6 +7,8 @@ import { AuthService } from './services/auth.service';
 import { HomeComponent } from './components/home/home.component';
 import { RoomsComponent } from './components/rooms/rooms.component';
 import { SensorsComponent } from './components/sensors/sensors.component';
+import { RoomComponent } from './components/room/room.component';
+import { SensorComponent } from './components/sensor/sensor.component';
 
 export const routes: Routes = [
     {
@@ -31,8 +33,16 @@ export const routes: Routes = [
                 component: RoomsComponent
             },
             {
+                path: "room/:id",
+                component: RoomComponent
+            },
+            {
                 path: "sensors",
                 component: SensorsComponent
+            },
+            {
+                path: "sensor/:id",
+                component: SensorComponent
             }
         ]
     }

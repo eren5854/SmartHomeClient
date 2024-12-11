@@ -1,11 +1,14 @@
-<!--**********************************
-            Content body start
-        ***********************************-->
-<div class="content-body" style="margin-left: 0 !important; padding-top: 0rem !important;">
-    <div class="container-fluid">
+
 
         <!-- row -->
         <div class="row">
+            <div class="row page-titles">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active"><a routerLink="/rooms">Odalar</a></li>
+                    <!-- <li class="breadcrumb-item"><a href="javascript:void(0)">Statistics</a></li> -->
+                </ol>
+            </div>
+
             <div class="card-body" style="margin-top: -30px;">
                 <button type="button" class="btn btn-success" data-bs-toggle="modal"
                     data-bs-target="#exampleModalCenter">Oda Ekle</button>
@@ -27,15 +30,19 @@
                             </button>
                         </div>
                         <form #roomCreateForm="ngForm" (ngSubmit)="create(roomCreateForm)">
-                        <div >
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="basic-form">
+                            <div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="basic-form">
                                             <div class="mb-3">
-                                                <input [(ngModel)]="roomModel.roomName" id="roomName" name="roomName" required type="text" class="form-control input-default " placeholder="Oda İsmi">
+                                                <input [(ngModel)]="roomModel.roomName" id="roomName" name="roomName"
+                                                    required type="text" class="form-control input-default "
+                                                    placeholder="Oda İsmi">
                                             </div>
                                             <div class="mb-3">
-                                                <input [(ngModel)]="roomModel.roomDescription" id="roomDescription" name="roomDescription" type="text" class="form-control input-default " placeholder="Oda Açıklaması">
+                                                <input [(ngModel)]="roomModel.roomDescription" id="roomDescription"
+                                                    name="roomDescription" type="text"
+                                                    class="form-control input-default " placeholder="Oda Açıklaması">
                                             </div>
                                         </div>
                                     </div>
@@ -49,9 +56,11 @@
                     </div>
                 </div>
             </div>
+
+
             <div *ngFor="let room of rooms; let i = index" class="col-xl-3 col-xxl-6 col-lg-6 col-sm-6">
                 <div class="widget-stat card">
-                    <div class="card-body p-4">
+                    <div routerLink="/room/{{room.id}}" class="card-body p-4" style="cursor: pointer;">
                         <div class="media ai-icon">
                             <!-- İkon rengi dinamik olarak atanıyor -->
                             <span class="me-3" [ngClass]="iconColors[i % iconColors.length]">
@@ -60,7 +69,7 @@
                             <div class="media-body text-end">
                                 <h4 class="mb-1">{{ room.roomName }}</h4>
                                 <p class="mb-0">
-                                    {{ roomSensorCounts[i]?.sensorCount || 0 }} Cihaz mevcut
+                                    {{ roomSensorCounts[i].sensorCount! || 0 }} Cihaz mevcut
                                 </p>
                             </div>
                         </div>
@@ -137,5 +146,3 @@
             </div> -->
 
         </div>
-    </div>
-</div>

@@ -5,5 +5,5 @@ export class RoomModel{
     roomName:string ="";
     roomDescription?:string;
     appUserId:string="";
-    sensors?: SensorModel[]
+    getAllSensor?: SensorModel[]
 }

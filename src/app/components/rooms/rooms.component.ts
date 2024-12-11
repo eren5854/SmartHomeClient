@@ -5,11 +5,12 @@ import { AuthService } from '../../services/auth.service';
 import { RoomModel } from '../../models/room.model';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-rooms',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.css'] // Düzeltme: styleUrl -> styleUrls
 })
@@ -48,7 +49,7 @@ export class RoomsComponent {
       // Her oda için sensör sayısını hesapla
       this.roomSensorCounts = this.rooms.map((room) => ({
         roomName: room.roomName,
-        sensorCount: room.sensors?.length || 0,
+        sensorCount: room.getAllSensor!.length || 0,
       }));
 
       console.log('Room Sensor Counts:', this.roomSensorCounts);

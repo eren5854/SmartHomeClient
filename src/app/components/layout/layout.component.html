@@ -242,36 +242,50 @@
 		<div class="dlabnav-scroll">
 			<ul class="metismenu" id="menu">
 				<li>
-					<a routerLink="/" aria-expanded="false">
+					<a href="/" aria-expanded="false">
 						<i class="fas fa-home"></i>
 						<span class="nav-text">Dashboard</span>
 					</a>
 				</li>
 				<li>
-					<a routerLink="/rooms" aria-expanded="false">
+					<a href="/rooms" aria-expanded="false">
 						<i class="fa-solid fa-couch"></i>
 						<span class="nav-text">Alanlar</span>
 					</a>
 				</li>
 
 				<li>
-					<a routerLink="/sensors" aria-expanded="false">
+					<a href="/sensors" aria-expanded="false">
 						<i class="fa-solid fa-lightbulb"></i>
 						<span class="nav-text">Cihazlar</span>
 					</a>
 				</li>
 
 				<li>
-					<a routerLink="/tv" aria-expanded="false">
+					<a href="/tv" aria-expanded="false">
 						<i class="fa-solid fa-tv"></i>
 						<span class="nav-text">TV</span>
 					</a>
 				</li>
 
 				<li>
-					<a routerLink="/scenario" aria-expanded="false">
+					<a href="/scenario" aria-expanded="false">
 						<i class="fa-solid fa-film"></i>
 						<span class="nav-text">Senaryo</span>
+					</a>
+				</li>
+
+				<li>
+					<a href="/scenario" aria-expanded="false">
+						<i class="fa-solid fa-shield-halved"></i>
+						<span class="nav-text">Güvenlik</span>
+					</a>
+				</li>
+
+				<li>
+					<a href="/scenario" aria-expanded="false">
+						<i class="fa-solid fa-gear"></i>
+						<span class="nav-text">Ayarlar</span>
 					</a>
 				</li>
 
@@ -318,13 +332,9 @@
 	<div class="content-body">
 		<!-- row -->
 		<div class="container-fluid">
-			<div class="row page-titles">
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item active"><a href="javascript:void(0)">Widget</a></li>
-					<li class="breadcrumb-item"><a href="javascript:void(0)">Statistics</a></li>
-				</ol>
-			</div>
+			
 			<div class="row">
+
 				<router-outlet></router-outlet>
 				<!-- <div class="col-xl-12">
 					<div class="row">
