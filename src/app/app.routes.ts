@@ -9,6 +9,8 @@ import { RoomsComponent } from './components/rooms/rooms.component';
 import { SensorsComponent } from './components/sensors/sensors.component';
 import { RoomComponent } from './components/room/room.component';
 import { SensorComponent } from './components/sensor/sensor.component';
+import { ScenariosComponent } from './components/scenarios/scenarios.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 export const routes: Routes = [
     {
@@ -43,6 +45,14 @@ export const routes: Routes = [
             {
                 path: "sensor/:id",
                 component: SensorComponent
+            },
+            {
+                path: "scenarios",
+                component: ScenariosComponent
+            },
+            {
+                path: "settings",
+                component: SettingsComponent
             }
         ]
     }
