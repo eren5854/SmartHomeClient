@@ -20,7 +20,9 @@ declare var $:any;
 export class ScenariosComponent {
   scenarios: ScenarioModel[] = [];
   scenarioModel: ScenarioCreateUpdateModel = new ScenarioCreateUpdateModel();
-  sensors:SensorModel[] = [];
+  actionSensors:SensorModel[] = [];
+  allSensors:SensorModel[] = [];
+
 
   triggerTypes: { id: number; name: string }[] = [
     { id: 0, name: 'Saat' },
@@ -34,7 +36,8 @@ export class ScenariosComponent {
 
   selectedTriggerType: number = 0;
   selectedActionType: number = 0;
-  selectedSensorId:string | null = null;
+  selectedTriggerSensorId:string | null = null;
+  selectedActionSensorId:string | null = null;
 
   constructor(
     private http: HttpService,
@@ -54,14 +57,15 @@ export class ScenariosComponent {
 
   getAllSensor(){
     this.http.get(`Sensors/GetAllSensorByUserId?Id=${this.auth.user.id}`, (res) => {
+      this.allSensors = res.data;
       this.getLightRelay(res.data);
     })
   }
 
   getLightRelay(lightRelay: SensorModel[]){
     lightRelay = lightRelay.filter(sensor => sensor.sensorType === 1);
-    this.sensors = lightRelay;
-    console.log(this.sensors);
+    this.actionSensors = lightRelay;
+    console.log(this.actionSensors);
     
   }
 
@@ -115,9 +119,16 @@ export class ScenariosComponent {
     console.log(this.selectedActionType);
   }
 
-  setSensorId(id:string){
-    this.scenarioModel.actionSensorId =id;
-    this.selectedSensorId = id;
+  setTriggerSensorId(id:string){
+    this.scenarioModel.triggerSensorId =id;
+    this.selectedTriggerSensorId = id;
+    console.log(this.scenarioModel.actionSensorId);
+    
+  }
+
+  setActionSensorId(id:string){
+    this.scenarioModel.actionSensorId = id;
+    this.selectedActionSensorId = id;
     console.log(this.scenarioModel.actionSensorId);
     
   }

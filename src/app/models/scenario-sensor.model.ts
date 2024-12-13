@@ -1,5 +1,5 @@
 export class ScenarioSensorModel{
-    id?:string;
+    sensorId?:string;
     sensorName?:string;
     data1?:number;
 }

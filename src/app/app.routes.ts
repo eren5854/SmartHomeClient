@@ -11,6 +11,7 @@ import { RoomComponent } from './components/room/room.component';
 import { SensorComponent } from './components/sensor/sensor.component';
 import { ScenariosComponent } from './components/scenarios/scenarios.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { ScenarioComponent } from './components/scenario/scenario.component';
 
 export const routes: Routes = [
     {
@@ -50,6 +51,10 @@ export const routes: Routes = [
                 path: "scenarios",
                 component: ScenariosComponent
             },
+            // {
+            //     path: "scenario/:id",
+            //     component: ScenarioComponent
+            // },
             {
                 path: "settings",
                 component: SettingsComponent

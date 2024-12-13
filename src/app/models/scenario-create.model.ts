@@ -8,6 +8,6 @@ export class ScenarioCreateUpdateModel{
     triggerValue?:number=0;
     triggerTime?:any;
     actionSensorId?:string;
-    actionType:number = 0;
-    actionValue:number = 0;
+    actionType?:number = 0;
+    actionValue?:number = 0;
 }
