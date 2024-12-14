@@ -114,6 +114,7 @@ export class HomeComponent {
   }
 
   updateSensorData(sensor: SensorModel) {
+    // sensor.secretKey = this.auth.secretToken;
     this.http.post("Sensors/UpdateSensorData", sensor, (res) => {
       console.log('Sensör durumu güncellendi:', res.data);
     });

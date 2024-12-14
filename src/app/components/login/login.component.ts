@@ -32,7 +32,7 @@ export class LoginComponent {
           console.log(res.data);
           localStorage.setItem("loginToken", res.data.token);
           // this.swal.callToast(res.message);
-          this.router.navigateByUrl("");
+          this.router.navigateByUrl("/");
         },
         error:(err:HttpErrorResponse) => {
           console.log(err);

@@ -10,7 +10,7 @@ export class AuthService {
 
   user: UserModel = new UserModel();
   token: string = "";
-  fullName: string = "";
+  secretToken:string = "";  
 
   constructor(private router: Router) { }
 
@@ -40,6 +40,12 @@ export class AuthService {
         this.user.userName = decode["UserName"];
 
         this.user.fullName = decode["FullName"];
+
+        this.user.firstName = decode["FirstName"];
+
+        this.user.lastName = decode["LastName"];
+
+        this.secretToken = decode["SecretToken"];
         
         this.user.role = decode["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
         

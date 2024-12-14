@@ -1,1 +1,165 @@
-<p>settings works!</p>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Kullanıcı Bilgileri</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-validation">
+                    <form #scenarioUpdateForm="ngForm" (ngSubmit)="update(scenarioUpdateForm)" class="needs-validation"
+                        novalidate="">
+                        <div class="row">
+                            <div class="mb-3 row">
+                                <label class="col-lg-4 col-form-label" for="validationCustom01">İsim
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-8">
+                                    <input [(ngModel)]="userModel.firstName" type="text" class="form-control"
+                                        id="firstName" name="firstName" placeholder="Lütfen adıızı giriniz..."
+                                        required="">
+                                    <div class="invalid-feedback">
+                                        Please enter a first name.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-lg-4 col-form-label" for="validationCustom02">Soy İsim
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-8">
+                                    <input [(ngModel)]="userModel.lastName" type="text" class="form-control"
+                                        id="lastName" name="lastName" placeholder="Lütfen soyadınızı giriniz..."
+                                        required="">
+                                    <div class="invalid-feedback">
+                                        Please enter a last name.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-lg-4 col-form-label" for="validationCustom02">Kullanıcı adı
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-8">
+                                    <input [(ngModel)]="userModel.userName" type="text" class="form-control"
+                                        id="userName" name="userName" placeholder="Lütfen kullanıcı adınızı giriniz..."
+                                        required="">
+                                    <div class="invalid-feedback">
+                                        Please enter a user name.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col-lg-8">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+
+                            <!-- <div class="mb-3 row">
+                                <label class="col-lg-4 col-form-label" for="validationCustom05">Best Skill
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-6">
+                                    <select class="default-select wide form-control" id="validationCustom05">
+                                        <option data-display="Select">Please select</option>
+                                        <option value="html">HTML</option>
+                                        <option value="css">CSS</option>
+                                        <option value="javascript">JavaScript</option>
+                                        <option value="angular">Angular</option>
+                                        <option value="angular">React</option>
+                                        <option value="vuejs">Vue.js</option>
+                                        <option value="ruby">Ruby</option>
+                                        <option value="php">PHP</option>
+                                        <option value="asp">ASP.NET</option>
+                                        <option value="python">Python</option>
+                                        <option value="mysql">MySQL</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please select a one.
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Şifre Değiştir</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-validation">
+                    <form #changePasswordForm="ngForm" (ngSubmit)="changePassword(changePasswordForm)"
+                        class="needs-validation" novalidate="">
+                        <div class="row">
+                            <div class="mb-3 row">
+                                <label class="col-lg-4 col-form-label" for="validationCustom01">Mevcut Şifre
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-8">
+                                    <input [(ngModel)]="changePasswordModel.currentPassword" type="password"
+                                        class="form-control" id="scenarioName" name="scenarioName" placeholder="*****"
+                                        required="">
+                                    <div class="invalid-feedback">
+                                        Please enter a first name.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-lg-4 col-form-label" for="validationCustom02">Yeni Şifre
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-8">
+                                    <input [(ngModel)]="changePasswordModel.newPassword" type="password"
+                                        class="form-control" id="scenarioDescription" name="scenarioDescription"
+                                        placeholder="*****" required="">
+                                    <div class="invalid-feedback">
+                                        Please enter a last name.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col-lg-8">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Secret Token</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-validation">
+                    <div class="row">
+                        <div class="mb-3 row">
+                                <div class="col-lg-12 position-relative">
+                                    <input [type]="showSecretKey ? 'text' : 'password'" [(ngModel)]="secretToken" readonly
+                                           id="secretKey" name="secretKey" class="form-control input-default" placeholder="Secret Key"
+                                           (click)="copyToClipboard(secretToken)">
+                                    <button type="button" class="btn position-absolute end-0 top-0"
+                                            (click)="showSecretKey = !showSecretKey" style="height: 100%; color: aliceblue;">
+                                        <i [class]="showSecretKey ? 'fa fa-eye-slash' : 'fa fa-eye'" style="color: red;"></i>
+                                    </button>
+                                </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col-lg-8">
+                                <button (click)="generateSecretToken()" type="button" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
