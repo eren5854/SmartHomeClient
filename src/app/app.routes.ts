@@ -12,6 +12,7 @@ import { SensorComponent } from './components/sensor/sensor.component';
 import { ScenariosComponent } from './components/scenarios/scenarios.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { ScenarioComponent } from './components/scenario/scenario.component';
+import { RemoteControlsComponent } from './components/remote-controls/remote-controls.component';
 
 export const routes: Routes = [
     {
@@ -55,6 +56,10 @@ export const routes: Routes = [
             //     path: "scenario/:id",
             //     component: ScenarioComponent
             // },
+            {
+                path: "remote-controls",
+                component: RemoteControlsComponent
+            },
             {
                 path: "settings",
                 component: SettingsComponent
