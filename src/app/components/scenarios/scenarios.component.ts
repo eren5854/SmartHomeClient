@@ -71,6 +71,18 @@ export class ScenariosComponent {
 
   create(form: NgForm) {
     this.scenarioModel.appUserId = this.auth.user.id!;
+  
+    // triggerTime dönüşümü (elle ISO formatı oluştur)
+    const today = new Date();
+    const [hours, minutes] = this.scenarioModel.triggerTime.split(":").map(Number);
+  
+    // Tarih stringini elle oluştur
+    const formattedTriggerTime = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}T${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:00.000Z`;
+  
+    this.scenarioModel.triggerTime = formattedTriggerTime;
+  
+    console.log(this.scenarioModel.triggerTime); // Örn: 2024-12-17T05:02:00.000Z
+  
     if (form.valid) {
       this.http.post("Scenarios/Create", this.scenarioModel, (res) => {
         console.log(res.data);

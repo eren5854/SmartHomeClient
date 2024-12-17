@@ -13,6 +13,7 @@ import { ScenariosComponent } from './components/scenarios/scenarios.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { ScenarioComponent } from './components/scenario/scenario.component';
 import { RemoteControlsComponent } from './components/remote-controls/remote-controls.component';
+import { RemoteControlComponent } from './components/remote-control/remote-control.component';
 
 export const routes: Routes = [
     {
@@ -59,6 +60,10 @@ export const routes: Routes = [
             {
                 path: "remote-controls",
                 component: RemoteControlsComponent
+            },
+            {
+                path: "remote-control/:id",
+                component: RemoteControlComponent
             },
             {
                 path: "settings",
