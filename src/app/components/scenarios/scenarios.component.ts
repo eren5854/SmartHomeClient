@@ -8,6 +8,7 @@ import { RouterLink } from '@angular/router';
 import { SwalService } from '../../services/swal.service';
 import { ScenarioCreateUpdateModel } from '../../models/scenario-create.model';
 import { SensorModel } from '../../models/sensor.model';
+import { MailSettingModel } from '../../models/mail-setting.model';
 declare var $:any;
 
 @Component({
@@ -22,7 +23,7 @@ export class ScenariosComponent {
   scenarioModel: ScenarioCreateUpdateModel = new ScenarioCreateUpdateModel();
   actionSensors:SensorModel[] = [];
   allSensors:SensorModel[] = [];
-
+  mailSettingModel: MailSettingModel = new MailSettingModel();
 
   triggerTypes: { id: number; name: string }[] = [
     { id: 0, name: 'Saat' },
@@ -46,6 +47,7 @@ export class ScenariosComponent {
   ) {
     this.get();
     this.getAllSensor();
+    this.getMailSetting();
   }
 
   get() {
@@ -116,6 +118,22 @@ export class ScenariosComponent {
         this.get();
       });
     });
+  }
+
+  getMailSetting(){
+    this.http.get(`MailSettings/GetByUserId?Id=${this.auth.user.id}`, (res) => {
+      this.mailSettingModel = res.data;
+    });
+  }
+
+  updateMailSetting(form:NgForm){
+    if (form.valid) {
+      this.http.post("MailSettings/Update", this.mailSettingModel, (res) => {
+        this.get();
+        this.getAllSensor();
+        this.getMailSetting();
+      })
+    }
   }
 
   setTriggerType(type: number) {

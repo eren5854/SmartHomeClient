@@ -4,6 +4,9 @@ import { AuthService } from '../../services/auth.service';
 import { HttpService } from '../../services/http.service';
 import { CommonModule } from '@angular/common';
 import { TemplateSettingModel } from '../../models/template-setting.model';
+import { NotificationModel } from '../../models/notification.model';
+import * as signalR from '@microsoft/signalr';
+import { SignalrService } from '../../services/signalr.service';
 
 @Component({
   selector: 'app-layout',
@@ -16,21 +19,49 @@ export class LayoutComponent {
   userName:string="";
   email:string="";
   fullName:string ="";
-
   activeMenu: string = '';
-
   templateSettingModel: TemplateSettingModel = new TemplateSettingModel();
-  
+  notifications: NotificationModel[] = [];
+
+    hub: signalR.HubConnection | undefined;
+  private intervalId: any;
 
   constructor(
     public auth: AuthService,
     private http: HttpService,
+    private signalR: SignalrService,
     private router: Router
   ){
     this.userName = auth.user.userName;
     this.email = auth.user.email;
     this.fullName = auth.user.fullName!;
     this.getTemplate();
+    this.getNotification();
+    // this.getSignalR();
+
+    this.intervalId = setInterval(() => {
+      this.getNotification();
+    }, 3000);
+  }
+
+  getSignalR(){
+    this.signalR.startConnection(() => {
+      this.signalR.on('Notifications', (res) => {
+        this.notifications.push(res.data);
+        console.log(this.notifications);
+        // const existingSensorIndex = this.temps.findIndex(temp => temp.id === res.data.id);        
+        // if (existingSensorIndex !== -1) {
+        //   this.temps[existingSensorIndex].data1 = res.data.data1;
+
+        // } 
+        // else {
+        //   // Eğer sensör yoksa yeni olarak ekle
+        //   this.temps.push(res);
+        // }
+  
+        // console.log(this.temps);
+      });
+    });
   }
 
   ngOnInit() {
@@ -77,6 +108,22 @@ export class LayoutComponent {
     });
   }
   
+  notificationCount: number = 0;
+
+  getNotification(){
+    this.http.get(`Notifications/GetAllByUserId?Id=${this.auth.user.id}`, (res) => {
+      this.notifications = res.data;
+      this.notifications = this.notifications.filter(f => f.isActive === true);
+      this.notificationCount = this.notifications.length;
+    });
+  }
+
+  updateIsActive(notification: NotificationModel){
+    this.http.get(`Notifications/UpdateIsActive?Id=${notification.id}`, (res) => {
+      console.log(res.data);
+      this.getNotification();
+    })
+  }
 
   logout(){
     localStorage.setItem("loginToken", "");

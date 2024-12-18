@@ -10,6 +10,7 @@ import { RoomModel } from '../../models/room.model';
 import { SensorDataModel } from '../../models/sensor-data.model';
 import * as signalR from '@microsoft/signalr';
 import { SignalrService } from '../../services/signalr.service';
+import { ChangeDetectorRef } from '@angular/core';
 declare var Chartist: any;
 
 @Component({
@@ -23,6 +24,7 @@ export class HomeComponent {
   sensors: SensorModel[] = [];
   temps: SensorModel[] = [];
   lights: SensorModel[] = [];
+  relays: SensorModel[] = [];
   rooms: RoomModel[] = [];
   sensorDataModel: SensorDataModel = new SensorDataModel();
 
@@ -32,45 +34,14 @@ export class HomeComponent {
     private http: HttpService,
     public auth: AuthService,
     private signalR: SignalrService,
+    private cdr: ChangeDetectorRef
   ) {
     this.get();
     this.getRoom();
     // this.hubContext();
+    this.getSignalR();
 
-    this.signalR.startConnection(() => {
-      this.signalR.on('Lights', (res: SensorModel) => {
-       this.getRoom();
-       console.log(res);
-       
-        console.log("Güncellenen veya eklenen sensör verisi:", this.temps);
-      });
-
-      this.signalR.on('Temp', (res: SensorModel) => {
-        this.get();
-        // const existingSensorIndex = this.temps.findIndex(sensor => sensor.id === res.id);
-      
-        // if (existingSensorIndex !== -1) {
-        //   // Mevcut sensörün verilerini güncelle, roomInfo.roomName'i koru
-        //   this.temps[existingSensorIndex] = {
-        //     ...this.temps[existingSensorIndex],
-        //     ...res,
-        //     roomInfo: {
-        //       ...this.temps[existingSensorIndex].roomInfo,
-        //       ...res.roomInfo,
-        //       roomName: this.temps[existingSensorIndex].roomInfo?.roomName || res.roomInfo?.roomName || '',
-        //       appUserId: res.roomInfo?.appUserId || 'default-app-user-id' // Varsayılan değer atanıyor
-        //     }
-        //   };
-        // } else {
-        //   // Eğer sensör dizide yoksa, yeni sensörü ekle
-        //   this.temps.push(res);
-        // }
-      
-        // console.log("Güncellenen veya eklenen sensör verisi:", this.temps);
-      });
-      
-      
-    });
+   
 
     // this.intervalId = setInterval(() => {
     //   this.get();
@@ -78,11 +49,60 @@ export class HomeComponent {
     // }, 3000);
   }
 
+  getSignalR(){
+    this.signalR.startConnection(() => {
+
+      // this.signalR.on('Lights', (res: SensorModel) => {
+      //   this.getRoom();
+      //   console.log(res);
+      //   console.log("Güncellenen veya eklenen sensör verisi:", this.sensors);
+      // });
+
+      this.signalR.on('Lights', (res) => {
+        this.rooms.forEach(room => {
+          const sensorIndex = room.getAllSensor?.findIndex(sensor => sensor.id === res.data.id);
+          if (sensorIndex !== -1) {
+            room.getAllSensor![sensorIndex!].data1 = res.data.data1;
+          }
+        });
+      
+        this.cdr.detectChanges(); // Angular'a değişiklik olduğunu bildir
+      });
+
+      this.signalR.on('Relays', (res) => {
+        this.rooms.forEach(room => {
+          const sensorIndex = room.getAllSensor?.findIndex(sensor => sensor.id === res.data.id);
+          if (sensorIndex !== -1) {
+            room.getAllSensor![sensorIndex!].data1 = res.data.data1;
+          }
+        });
+      
+        this.cdr.detectChanges(); // Angular'a değişiklik olduğunu bildir
+      });
+
+      this.signalR.on('Temp', (res) => {
+        const existingSensorIndex = this.temps.findIndex(temp => temp.id === res.data.id);        
+        
+        if (existingSensorIndex !== -1) {
+          this.temps[existingSensorIndex].data1 = res.data.data1;
+
+        } 
+        // else {
+        //   // Eğer sensör yoksa yeni olarak ekle
+        //   this.temps.push(res);
+        // }
+  
+        // console.log(this.temps);
+      });
+    });
+  }
+
   get() {
     this.http.get(`Sensors/GetAllSensorByUserId?Id=${this.auth.user.id}`, (res) => {
       this.sensors = res.data;
       this.getTemps(this.sensors);
       this.getLights(this.sensors);
+      this.getRelays(this.sensors);
     });
   }
 
@@ -91,9 +111,16 @@ export class HomeComponent {
     this.temps = temps;
   }
 
-  getLights(lights: SensorModel[]){
+  getLights(lights: SensorModel[]) {
     lights = lights.filter(sensor => sensor.sensorType === 1);
     this.lights = lights;
+  }
+
+  getRelays(relays: SensorModel[]){
+    relays = relays.filter(sensor => sensor.sensorType === 2);
+    this.relays = relays;
+    console.log(relays);
+    
   }
 
   getRoom() {

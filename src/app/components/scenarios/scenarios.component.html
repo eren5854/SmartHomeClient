@@ -81,9 +81,6 @@
                                         <input [(ngModel)]="scenarioModel.scenarioName" type="text" class="form-control"
                                             id="scenarioName" name="scenarioName" placeholder="Senaryo ismi..."
                                             required="">
-                                        <div class="invalid-feedback">
-                                            Please enter a username.
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
@@ -94,9 +91,6 @@
                                         <input [(ngModel)]="scenarioModel.scenarioDescription" type="text"
                                             class="form-control" id="scenarioDescription" name="scenarioDescription"
                                             placeholder="Senaryo açıklaması..." required="">
-                                        <div class="invalid-feedback">
-                                            Please enter a Email.
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
@@ -122,9 +116,6 @@
                                         <input [(ngModel)]="scenarioModel.triggerTime" type="time"
                                             class="form-control" id="scenarioDescription" name="scenarioDescription"
                                             placeholder="Tetikleme saati" required="">
-                                        <div class="invalid-feedback">
-                                            Lütfen saati giriniz
-                                        </div>
                                     </div>
                                 </div>
                                 <div *ngIf="selectedTriggerType === 1" class="mb-3 row">
@@ -134,12 +125,6 @@
                                     <div class="col-lg-6">
                                         <button *ngFor="let sensor of allSensors" (click)="setTriggerSensorId(sensor.id!)" type="button"
                                         [ngClass]="{'btn-dark': sensor.id !== selectedTriggerSensorId, 'btn-success': sensor.id === selectedTriggerSensorId}" class="btn mt-2 me-2" type="button" style="max-width: 150px; max-height: 50px; font-size: 12px;">{{sensor.sensorName}}</button>
-                                        <!-- <input [(ngModel)]="scenarioModel.triggerSensorId" type="text"
-                                            class="form-control" id="scenarioDescription" name="scenarioDescription"
-                                            placeholder="Your valid email.." required="">
-                                        <div class="invalid-feedback">
-                                            Lütfen saati giriniz
-                                        </div> -->
                                     </div>
                                 </div>
                                 <div *ngIf="selectedTriggerType === 1" class="mb-3 row">
@@ -150,9 +135,6 @@
                                         <input [(ngModel)]="scenarioModel.triggerValue" type="number"
                                             class="form-control" id="scenarioDescription" name="scenarioDescription"
                                             placeholder="Your valid email.." required="">
-                                        <div class="invalid-feedback">
-                                            Lütfen saati giriniz
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -165,12 +147,6 @@
                                     <div class="col-lg-6">
                                         <button *ngFor="let sensor of actionSensors" (click)="setActionSensorId(sensor.id!)" type="button"
                                         [ngClass]="{'btn-dark': sensor.id !== selectedActionSensorId, 'btn-success': sensor.id === selectedActionSensorId}" class="btn mt-2 me-2" type="button" style="max-width: 150px; max-height: 50px; font-size: 12px;">{{sensor.sensorName}}</button>
-                                        <!-- <input [(ngModel)]="scenarioModel.actionSensorId" type="text"
-                                            class="form-control" id="scenarioDescription" name="scenarioDescription"
-                                            placeholder="Your valid email.." required=""> -->
-                                        <div class="invalid-feedback">
-                                            Please enter a Email.
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="mb-3 row">
@@ -197,9 +173,6 @@
                                         <input [(ngModel)]="scenarioModel.actionValue" type="number"
                                             class="form-control" id="scenarioDescription" name="scenarioDescription"
                                             placeholder="Aksiyon değeri giriniz..." required="">
-                                        <div class="invalid-feedback">
-                                            Please enter a Email.
-                                        </div>
                                     </div>
                                 </div>
 
@@ -227,6 +200,71 @@
                                         </div>
                                     </div>
                                 </div> -->
+                                <div class="mb-3 row">
+                                    <div class="col-lg-8 ms-auto">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Mail Gönderme Ayarları</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-validation">
+                    <form #mailUpdateForm="ngForm" (ngSubmit)="updateMailSetting(mailUpdateForm)" class="needs-validation" novalidate="">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label">Email
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input [(ngModel)]="mailSettingModel.email" type="text" class="form-control"
+                                            id="email" name="email" placeholder="Senaryo ismi..."
+                                            required="">
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom02">Uygulama Şifresi
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input [(ngModel)]="mailSettingModel.appPassword" type="password"
+                                            class="form-control" id="appPassword" name="appPassword"
+                                            placeholder="Senaryo açıklaması..." required="">
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label">Smtp Domain
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input [(ngModel)]="mailSettingModel.smtpDomainName" type="text" class="form-control"
+                                            id="smtpDomainName" name="smtpDomainName" placeholder="Senaryo ismi..."
+                                            required="">
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom02">Smtp Portu
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input [(ngModel)]="mailSettingModel.smtpPort" type="number"
+                                            class="form-control" id="smtpPort" name="smtpPort"
+                                            placeholder="Senaryo açıklaması..." required="">
+                                    </div>
+                                </div>
+
                                 <div class="mb-3 row">
                                     <div class="col-lg-8 ms-auto">
                                         <button type="submit" class="btn btn-primary">Submit</button>

@@ -62,74 +62,31 @@
 						<li class="nav-item dropdown notification_dropdown">
 							<a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
 								<i class="fa-solid fa-bell"></i>
-								<span class="badge light text-white bg-warning rounded-circle">12</span>
+								<span class="badge light text-white bg-info rounded-circle">{{notificationCount}}</span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-end">
 								<div id="DZ_W_Notification1" class="widget-media dlab-scroll p-3" style="height:380px;">
 									<ul class="timeline">
-										<li>
+										<li *ngFor="let notification of notifications" (click)="updateIsActive(notification)">
 											<div class="timeline-panel">
-												<div class="media me-2">
-													<img alt="image" width="50" src="images/avatar/1.jpg">
+												<div *ngIf="notification.notificationType === 0" class="media me-2 media-success">
+													<i  class="fa fa-home"></i>
+												</div>
+												<div *ngIf="notification.notificationType === 1" class="media me-2 media-info">
+													<i  class="fa fa-info"></i>
+												</div>
+												<div *ngIf="notification.notificationType === 2" class="media me-2 media-warning">
+													<i  class="fa fa-home"></i>
+												</div>
+												<div *ngIf="notification.notificationType === 3" class="media me-2 media-danger">
+													<i  class="fa fa-home"></i>
 												</div>
 												<div class="media-body">
-													<h6 class="mb-1">Dr sultads Send you Photo</h6>
-													<small class="d-block">29 July 2020 - 02:26 PM</small>
+													<h6 class="mb-1">{{notification.notificationName}}</h6>
+													<small class="d-block">{{notification.createdDate | date: "dd/MM/yyyy - HH:mm"}}</small>
 												</div>
-											</div>
-										</li>
-										<li>
-											<div class="timeline-panel">
-												<div class="media me-2 media-info">
-													KG
-												</div>
-												<div class="media-body">
-													<h6 class="mb-1">Resport created successfully</h6>
-													<small class="d-block">29 July 2020 - 02:26 PM</small>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="timeline-panel">
-												<div class="media me-2 media-success">
-													<i class="fa fa-home"></i>
-												</div>
-												<div class="media-body">
-													<h6 class="mb-1">Reminder : Treatment Time!</h6>
-													<small class="d-block">29 July 2020 - 02:26 PM</small>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="timeline-panel">
-												<div class="media me-2">
-													<img alt="image" width="50" src="images/avatar/1.jpg">
-												</div>
-												<div class="media-body">
-													<h6 class="mb-1">Dr sultads Send you Photo</h6>
-													<small class="d-block">29 July 2020 - 02:26 PM</small>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="timeline-panel">
-												<div class="media me-2 media-danger">
-													KG
-												</div>
-												<div class="media-body">
-													<h6 class="mb-1">Resport created successfully</h6>
-													<small class="d-block">29 July 2020 - 02:26 PM</small>
-												</div>
-											</div>
-										</li>
-										<li>
-											<div class="timeline-panel">
-												<div class="media me-2 media-primary">
-													<i class="fa fa-home"></i>
-												</div>
-												<div class="media-body">
-													<h6 class="mb-1">Reminder : Treatment Time!</h6>
-													<small class="d-block">29 July 2020 - 02:26 PM</small>
+												<div class="me-2" style="cursor: pointer; font-size: 18px; color: red;">
+													<i  class="fa fa-xmark"></i>
 												</div>
 											</div>
 										</li>
@@ -304,7 +261,7 @@
 						<i class="fas fa-caret-down scale5 text-light"></i>
 					</div>
 				</div>
-				<div class="d-flex justify-content-between mb-2 progress-info">
+				<!-- <div class="d-flex justify-content-between mb-2 progress-info">
 					<span class="fs-12"><i class="fas fa-star text-orange me-2"></i>Task Progress</span>
 					<span class="fs-12">20/45</span>
 				</div>
@@ -313,12 +270,12 @@
 						role="progressbar">
 						<span class="sr-only">45% Complete</span>
 					</div>
-				</div>
+				</div> -->
 			</div>
 
 			<div class="copyright">
-				<p><strong>Fillow Saas Admin</strong> © 2021 All Rights Reserved</p>
-				<p class="fs-12">Made with <span class="heart"></span> by DexignLabs</p>
+				<p><strong>Smart Home</strong> © 2024 Tüm Hakları Saklıdır</p>
+				<p class="fs-12">by İhsan Eren Delibaş</p>
 			</div>
 		</div>
 	</div>
@@ -1137,20 +1094,10 @@
         ***********************************-->
 	<div class="footer">
 		<div class="copyright">
-			<p>Copyright © Designed &amp; Developed by <a href="../index.htm" target="_blank">DexignLab</a> 2021</p>
+			<p>Copyright © Developed by <a href="../index.htm" target="_blank">İhsan Eren Delibaş</a> 2024</p>
 		</div>
 	</div>
 	<!--**********************************
             Footer end
         ***********************************-->
-
-	<!--**********************************
-           Support ticket button start
-        ***********************************-->
-
-	<!--**********************************
-           Support ticket button end
-        ***********************************-->
-
-
 </div>
