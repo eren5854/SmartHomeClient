@@ -1,0 +1,116 @@
+<div class="row page-titles">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active"><a routerLink="/sensors">Cihazlar</a></li>
+        <li class="breadcrumb-item"><a routerLink="/sensor/{{sensorId}}">{{sensorModel.sensorName}}</a></li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-xl-6 col-lg-6 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <form #sensorUpdateForm="ngForm" (ngSubmit)="update(sensorUpdateForm)">
+                    <div class="basic-form">
+                        <div class="mb-3">
+                            <input [(ngModel)]="sensorModel.sensorName" id="roomName" name="roomName" required
+                                type="text" class="form-control input-default " placeholder="Oda İsmi">
+                        </div>
+                        <div class="mb-3">
+                            <input [(ngModel)]="sensorModel.description" id="roomDescription" name="roomDescription"
+                                type="text" class="form-control input-default " placeholder="Oda Açıklaması">
+                        </div>
+                        <div class="mb-3">
+                            <!-- <input [(ngModel)]="sensorModel.roomId" id="roomId" name="roomId"
+                             type="text" class="form-control input-default "
+                                placeholder="Oda"> -->
+
+                                <button *ngFor="let room of rooms" 
+                                (click)="setRoomId(room.id!)" 
+                                type="button"
+                                class="btn me-3"
+                                [ngClass]="{'btn-info': room.id !== selectedRoomId, 'btn-success': room.id === selectedRoomId}">
+                          {{room.roomName}}
+                        </button>
+
+                        </div>
+                        <div class="mb-3">
+                            <input [(ngModel)]="sensorModel.sensorType" id="sensorType" name="sensorType" type="number"
+                                class="form-control input-default " placeholder="Sensör Tipi">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary me-3">Kaydet</button>
+                    <button type="button" (click)="deleteById()" class="btn btn-danger light">Bu cihazı sil</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6 col-lg-6 mb-3">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="basic-form">
+                    <div class="mb-3">
+                        <input readonly [(ngModel)]="sensorModel.serialNo" id="serialNo" name="serialNo" required
+                            type="text" class="form-control input-default " placeholder="Seri Numara">
+                    </div>
+                    <div class="mb-3">
+                        <input readonly [(ngModel)]="sensorModel.status" id="status" name="status" type="text"
+                            class="form-control input-default " placeholder="Durum">
+                    </div>
+                    <div class="mb-3">
+                        <input readonly [value]="sensorModel.createdDate | date:'dd/MM/yyyy'" id="createdDate"
+                        name="createdDate" type="text" class="form-control input-default"
+                        placeholder="Oluşturma tarihi">
+                    </div>
+                    <div class="mb-3 position-relative">
+                        <input [type]="showSecretKey ? 'text' : 'password'" [(ngModel)]="sensorModel.secretKey" readonly
+                               id="secretKey" name="secretKey" class="form-control input-default" placeholder="Secret Key"
+                               (click)="copyToClipboard(sensorModel.secretKey!)">
+                        <button type="button" class="btn position-absolute end-0 top-0"
+                                (click)="showSecretKey = !showSecretKey" style="height: 100%; color: aliceblue;">
+                            <i [class]="showSecretKey ? 'fa fa-eye-slash' : 'fa fa-eye'" style="color: red;"></i>
+                        </button>
+                    </div>
+                    <button (click)="generateSecretKey()" type="button" class="btn btn-primary me-3">Secret Key oluştur</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-12 col-lg-6 mb-3">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Günlük Kullanım</h4>
+            </div>
+            <div class="card-body">
+                <div id="flotBar2" class="flot-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="col-xl-6 col-lg-6 mb-3">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Haftalık Kullanım(Dakika)</h4>
+            </div>
+            <div class="card-body">
+                <div id="flotBar1" class="flot-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="sensorModel.sensorType === 1" class="col-lg-6 col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title"></h4>
+            </div>
+            <div class="card-body">
+                <div id="flotLine1" class="flot-chart"></div>
+            </div>
+        </div>
+    </div>
+    
+</div>

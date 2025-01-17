@@ -1,0 +1,150 @@
+<div class="row page-titles">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active"><a routerLink="/sensors">Cihazlar</a></li>
+        <!-- <li class="breadcrumb-item"><a href="javascript:void(0)">Statistics</a></li> -->
+    </ol>
+</div>
+<div class="row">
+
+    <div class="card-body" style="margin-top: -30px;">
+        <button type="button" class="btn btn-warning" style="color: black;" data-bs-toggle="modal"
+            data-bs-target="#exampleModalCenter">Sensor Ekle</button>
+        <!-- <button type="button" class="btn btn-secondary">Secondary</button>
+                <button type="button" class="btn btn-success">Success</button>
+                <button type="button" class="btn btn-danger">Danger</button>
+                <button type="button" class="btn btn-warning">Warning</button>
+                <button type="button" class="btn btn-info">Info</button>
+                <button type="button" class="btn btn-light">Light</button>
+                <button type="button" class="btn btn-dark">Dark</button> -->
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sensör Ekle</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    </button>
+                </div>
+                <form #sensorCreateForm="ngForm" (ngSubmit)="create(sensorCreateForm)">
+                    <div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="basic-form">
+                                    <div class="mb-3">
+                                        <input [(ngModel)]="sensorModel.sensorName" id="sensorName" name="sensorName"
+                                            required type="text" class="form-control input-default "
+                                            placeholder="Sensor İsmi">
+                                    </div>
+                                    <div class="mb-3">
+                                        <input [(ngModel)]="sensorModel.description" id="description" name="description"
+                                            required type="text" class="form-control input-default "
+                                            placeholder="Sensor Açıklaması">
+                                    </div>
+                                    <!-- <div class="mb-3">
+                                                <input [(ngModel)]="sensorModel.roomId" id="roomId" name="roomId"
+                                                 type="text" class="form-control input-default "
+                                                    placeholder="Oda">
+                                            </div> -->
+                                    <div class="mb-3">
+                                        <button *ngFor="let room of rooms" (click)="setRoomId(room.id!)" type="button"
+                                            class="btn me-3"
+                                            [ngClass]="{'btn-info': room.id !== selectedRoomId, 'btn-success': room.id === selectedRoomId}">
+                                            {{room.roomName}}
+                                        </button>
+                                    </div>
+                                    <div class="mb-3">
+                                        <input [(ngModel)]="sensorModel.sensorType" id="sensorType" name="sensorType"
+                                            type="number" class="form-control input-default " placeholder="Sensör Tipi">
+                                    </div>
+                                    <!-- <div class="mb-3">
+                                                 
+                                                <select  [(ngModel)]="sensorTip" id="sensorType" name="sensorType" class="default-select  form-control wide">
+                                                    <option value="" disabled selected>Tip Seçiniz</option>
+                                                    <option *ngFor="let type of sensorType; let i = index" [value]="i">{{ i }}{{ type }}</option>
+                                                    
+                                                </select>
+                                                {{sensorTip}}
+                                            </div> -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger light" data-bs-dismiss="modal">Kapat</button>
+                        <button type="submit" class="btn btn-primary">Ekle</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div *ngFor="let sensor of sensors; let i = index" class="col-xl-3 col-xxl-6 col-lg-6 col-sm-6">
+        <div routerLink="/sensor/{{sensor.id}}" class="widget-stat card bg-dark" style="cursor: pointer;">
+            <div class="card-body  p-4">
+                <div class="media">
+                    <span class="me-3">
+                        <i *ngIf="sensorType[sensor.sensorType!] === 'Light'" class="fa-solid fa-lightbulb"></i>
+                        <i *ngIf="sensorType[sensor.sensorType!] === 'Temperature'"
+                            class="fa-solid fa-temperature-three-quarters"></i>
+                    </span>
+                    <div class="media-body text-white text-end">
+                        <p class="mb-1">{{sensor.sensorName}}</p>
+                        <h3 *ngIf="sensorType[sensor.sensorType!] === 'Relay'" class="text-white">{{
+                            sensor.data1
+                            === 1 ? 'On' : 'Off' }}</h3>
+                        <h3 *ngIf="sensorType[sensor.sensorType!] === 'Temperature'" class="text-white">
+                            {{sensor.data1}}</h3>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="col-xl-3 col-xxl-6 col-lg-6 col-sm-6">
+                <div class="widget-stat card bg-success">
+                    <div class="card-body p-4">
+                        <div class="media">
+                            <span class="me-3">
+                                <i class="flaticon-381-diamond"></i>
+                            </span>
+                            <div class="media-body text-white text-end">
+                                <p class="mb-1">Earning</p>
+                                <h3 class="text-white">$56K</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-xxl-6 col-lg-6 col-sm-6">
+                <div class="widget-stat card bg-info">
+                    <div class="card-body p-4">
+                        <div class="media">
+                            <span class="me-3">
+                                <i class="flaticon-381-heart"></i>
+                            </span>
+                            <div class="media-body text-white text-end">
+                                <p class="mb-1">Total Patient</p>
+                                <h3 class="text-white">783K</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-xxl-6 col-lg-6 col-sm-6">
+                <div class="widget-stat card bg-primary">
+                    <div class="card-body p-4">
+                        <div class="media">
+                            <span class="me-3">
+                                <i class="flaticon-381-user-7"></i>
+                            </span>
+                            <div class="media-body text-white text-end">
+                                <p class="mb-1">Chef</p>
+                                <h3 class="text-white">$76</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+</div>
