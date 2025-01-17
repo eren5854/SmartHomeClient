@@ -18,7 +18,7 @@ export class LoginComponent {
   loginModel: LoginModel = new LoginModel();
   userModel: UserModel = new UserModel();
 
-  url:string = "http://akillibina.api.erendelibas.xyz/api";
+  url:string = "https://smartbuildapi.erendelibas.xyz/api/";
   // url:string = "http://192.168.68.154:54010/api";
 
   // url:string = "https://192.168.68.112:45455/api/Auth/Login"
