@@ -10,7 +10,7 @@ export class HttpService {
   // imageUrl:string = "https://localhost:7023/Images/";
   // url:string = "https://localhost:7023/api/"
   // url:string = "http://192.168.68.134:54010/api/";
-  url:string = "http://akillibina.api.erendelibas.xyz/api/"
+  url:string = "https://smartbuildapi.erendelibas.xyz/api/"
    constructor(
      private http: HttpClient,
      private auth: AuthService,
