@@ -11,7 +11,7 @@ export class SignalrService {
 
   startConnection(callback: () => void) {
     this.hub = new signalR.HubConnectionBuilder()
-      .withUrl('http://smartbuildapi.erendelibas.xyz/sensor-hub')
+      .withUrl('https://smartbuildapi.erendelibas.xyz/sensor-hub')
       .build();
 
     this.hub
